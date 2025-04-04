@@ -1,0 +1,17 @@
+export const configuration = () => ({
+  PORT: process.env.PORT,
+  DATABASE_NAME: process.env.DATABASE_NAME,
+  DATABASE_HOST: process.env.DATABASE_HOST,
+  DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
+  DATABASE_USERNAME: process.env.DATABASE_USERNAME,
+  DATABASE_PORT: process.env.DATABASE_PORT,
+  REDIS_HOST: process.env.REDIS_HOST,
+  REDIS_PORT: process.env.REDIS_PORT,
+  JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
+  SMTP_GMAIL: process.env.SMTP_GMAIL,
+  SMTP_PORT: process.env.SMTP_PORT,
+  SMTP_USER: process.env.SMTP_USER,
+  SMTP_PASSWORD: process.env.SMTP_PASSWORD,
+  ESKIZ_USER: process.env.ESKIZ_USER,
+  ESKIZ_PASSWORD: process.env.ESKIZ_PASSWORD,
+});
