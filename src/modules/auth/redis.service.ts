@@ -85,16 +85,11 @@ export class RedisService {
     const randomUuid = crypto.randomUUID();
     const emailTokenKey = `email-tokens:${email}`;
     const verificationKey = `verification-email:${randomUuid}`;
-    const code = this.generateOtpPassword();
     const getOldToken = await this.redis.get(emailTokenKey);
     if (getOldToken) {
       await this.redis.del(`verification-email:${getOldToken}`);
     }
-    await this.redis.setex(
-      verificationKey,
-      3600,
-      JSON.stringify({ email, code: code }),
-    );
+    await this.redis.setex(verificationKey, 3600, JSON.stringify({ email }));
     await this.redis.setex(emailTokenKey, 3600, randomUuid);
     const link = `http://localhost:3000/api/users/verify/email?token=${randomUuid}`;
     return link;

@@ -11,6 +11,7 @@ import { SubmissionModule } from './modules/submission/submission.module';
 import { UsersModule } from './modules/users/users.module';
 import { configuration } from './common/config/configuration';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
       }),
       inject: [ConfigService],
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [

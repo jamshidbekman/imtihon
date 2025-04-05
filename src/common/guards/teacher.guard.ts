@@ -21,7 +21,11 @@ export class TeacherGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     try {
       const request = context.switchToHttp().getRequest();
-      const token = request.headers['authorization'].split(' ')[1];
+      const token = request.cookies?.['access_token'];
+
+      if (!token) {
+        throw new ForbiddenException('Token topilmadi');
+      }
       const { user_id } = this.jwtService.verify(token, {
         secret: this.configService.get('JWT_SECRET_KEY'),
       });

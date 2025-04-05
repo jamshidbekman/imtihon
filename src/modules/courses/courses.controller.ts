@@ -35,11 +35,8 @@ export class CoursesController {
   }
 
   @Get(':id')
-  async findOne(
-    @Param('id') id: string,
-    @Headers('authorization') body: string,
-  ) {
-    const token = body.split(' ')[1];
-    return await this.coursesService.findOne(id, token);
+  @UseGuards(AuthGuard)
+  async findOne(@Param('id') id: string) {
+    return await this.coursesService.findOne(id);
   }
 }

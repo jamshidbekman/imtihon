@@ -48,33 +48,23 @@ export class CoursesService {
       skip: (page - 1) * limit,
       order: { createdAt: 'DESC' },
     });
-    console.log(courses[0]);
 
-    // const findUser = await this.userRepository.findOne(courses[0]);
     return {
-      message: 'course royxati',
+      message: 'Kurslar royxati',
       data: {
-        items: courses,
+        courses,
       },
     };
   }
-  async findOne(id: string, token: string) {
-    const findUser = await this.jwtService.verify(token, {
-      secret: this.configService.get('JWT_SECRET_KEY'),
-    });
-    if (!findUser) throw new UnauthorizedException('token invalid');
+  async findOne(id: string) {
     const course = await this.courseRepository.findOne({
       where: { id: id },
-      relations: ['materials', 'assignments'],
     });
-    if (!course) {
-      throw new NotFoundException(`Course with id ${id} not found`);
-    }
-    console.log(course);
-    return course;
-  }
 
-  remove(id: number) {
-    return `This action removes a #${id} course`;
+    if (!course) {
+      throw new NotFoundException(`Bu id boyicha kurs topilmadi`);
+    }
+
+    return { data: course };
   }
 }

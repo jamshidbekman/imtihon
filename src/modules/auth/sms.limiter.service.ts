@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { RedisService } from './redis.service';
+import { RedisService } from '../auth/redis.service';
 
 @Injectable()
 class SmsLimiterService {
